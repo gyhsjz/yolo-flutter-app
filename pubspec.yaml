@@ -20,7 +20,7 @@ funding:
 
 environment:
   sdk: ^3.8.1
-  flutter: ">=3.32.1"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:
