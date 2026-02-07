@@ -49,14 +49,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString() // Use toString() for jvmTarget
-    }
-
-    // Configure Java Toolchain to use JDK 17
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     sourceSets {
@@ -64,57 +57,19 @@ android {
         test.java.srcDirs += "src/test/kotlin"
     }
 
-    // NDK version: Use project property if set by host app, otherwise use a compatible default
-    // Host apps can override by setting: ext.ndkVersion = flutter.ndkVersion in their build.gradle
-    // NDK 25.x is more stable and widely compatible
-    ndkVersion = project.hasProperty('ndkVersion') ? project.ndkVersion : "25.2.9519653"
-
     defaultConfig {
         minSdk = 21
-        
-        // Native library build configuration
-        // externalNativeBuild {
-        //     cmake {
-        //         cppFlags ""
-        //     }
-        // }
-
-        // Supported ABIs - limit to arm64 for faster CI builds
-        ndk {
-            abiFilters "arm64-v8a"
-        }
     }
-    
-    // CMake build configuration - disabled for CI to simplify build
-    // externalNativeBuild {
-    //     cmake {
-    //         path "src/main/cpp/CMakeLists.txt"
-    //     }
-    // }
 
     dependencies {
-        // Flutter embedding from Maven Central for better compatibility
+        // Use standard Flutter embedding
         compileOnly 'io.flutter:flutter_embedding_debug:1.0.0'
         compileOnly 'io.flutter:flutter_embedding_profile:1.0.0'
         compileOnly 'io.flutter:flutter_embedding_release:1.0.0'
         
-        implementation("com.google.ai.edge.litert:litert:1.4.0")
-        implementation("com.google.ai.edge.litert:litert-gpu:1.4.0")
-        implementation('com.google.ai.edge.litert:litert-support-api:1.4.0')
-        implementation('com.google.ai.edge.litert:litert-metadata:1.4.0')
         testImplementation("junit:junit:4.13.2")
         androidTestImplementation("androidx.test.ext:junit:1.1.5")
         androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-        implementation("org.yaml:snakeyaml:1.29")
-        implementation("androidx.camera:camera-core:1.2.3")
-        implementation("androidx.camera:camera-camera2:1.2.3")
-        implementation("androidx.camera:camera-lifecycle:1.2.3")
-        implementation("androidx.camera:camera-view:1.2.3")
-        implementation("androidx.core:core-ktx:1.10.1")
-        implementation("androidx.appcompat:appcompat:1.6.1")
-        
-        testImplementation("org.jetbrains.kotlin:kotlin-test")
-        testImplementation("org.mockito:mockito-core:5.0.0")
     }
 
     testOptions {
