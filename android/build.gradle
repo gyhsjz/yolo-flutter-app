@@ -73,11 +73,11 @@ android {
         minSdk = 21
         
         // Native library build configuration
-        externalNativeBuild {
-            cmake {
-                cppFlags ""
-            }
-        }
+        // externalNativeBuild {
+        //     cmake {
+        //         cppFlags ""
+        //     }
+        // }
 
         // Supported ABIs - limit to arm64 for faster CI builds
         ndk {
@@ -85,12 +85,12 @@ android {
         }
     }
     
-    // CMake build configuration
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-        }
-    }
+    // CMake build configuration - disabled for CI to simplify build
+    // externalNativeBuild {
+    //     cmake {
+    //         path "src/main/cpp/CMakeLists.txt"
+    //     }
+    // }
 
     dependencies {
         // Flutter embedding from Maven Central for better compatibility
