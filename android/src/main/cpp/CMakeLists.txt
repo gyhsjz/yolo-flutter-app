@@ -12,21 +12,20 @@ SHARED
 native-lib.cpp        # C++ source file
 )
 
-# NDK r28 automatically handles 16KB page size for arm64-v8a and x86_64
-# The following configuration is kept for explicit documentation
-# but is no longer strictly necessary with NDK r28
+# NDK r25 provides stable C++ standard library linkage
+# This configuration ensures compatibility across different Android architectures
 if(ANDROID_ABI STREQUAL "arm64-v8a" OR ANDROID_ABI STREQUAL "x86_64")
-    message(STATUS "NDK r28: 16KB page size support enabled by default for ${ANDROID_ABI}")
+    message(STATUS "NDK r25: Stable C++ standard library support for ${ANDROID_ABI}")
 endif()
 
-# Ensure proper C++ standard library linkage for NDK r28
+# Ensure proper C++ standard library linkage for NDK r25
 # This is critical to resolve undefined symbol errors like std::__throw_length_error
 set_target_properties(ultralytics PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
 
-# Add compile definitions and flags for NDK r28 compatibility
+# Add compile definitions and flags for NDK r25 compatibility
 target_compile_options(ultralytics PRIVATE
     -fexceptions
     -frtti
