@@ -75,14 +75,13 @@ android {
         // Native library build configuration
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++17 -fexceptions -frtti"
-                arguments "-DANDROID_STL=c++_shared", "-DANDROID_CPP_FEATURES=rtti exceptions"
+                cppFlags ""
             }
         }
 
-        // Supported ABIs
+        // Supported ABIs - limit to arm64 for faster CI builds
         ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            abiFilters "arm64-v8a"
         }
     }
     
